@@ -48,22 +48,27 @@ module SocketModel {
             var isLoggedIn = false;
 
             // Register events.
-            socket.on('disconnection', () => {
+            socket.on('disconnect', () => {
                 if (!isLoggedIn)
                     return;
 
-                socket.broadcast.to('userLogout', socket.userId);
+                this._ioServer.emit('userLogout', {id: socket.userId});
 
                 delete this._allClients[socket.userId];
             });
             socket.on('sendMessage', (data: string) => {
-                socket.broadcast.to('message', {
+                if (!isLoggedIn)
+                    return;
+
+                socket.broadcast.emit('message', {
                     id: socket.userId,
                     message: data
                 });
             });
             socket.on('register', (data: string) => {
                 isLoggedIn = true;
+
+                console.log('User "' + data + '" registered');
 
                 socket.username = data;
 
@@ -76,7 +81,7 @@ module SocketModel {
                 this._allClients[socket.userId] = socket;
 
                 // Notify everyone of the new user.
-                socket.broadcast.to('userLogin', {
+                socket.broadcast.emit('userLogin', {
                     name: socket.username,
                     id: socket.userId
                 });

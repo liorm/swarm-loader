@@ -1,8 +1,10 @@
-///<reference path='../typings/tsd.d.ts' />
+///<reference path='../../typings/tsd.d.ts' />
+
 'use strict';
-var http = require('http');
-var express = require('express');
-var SocketModel = require('./models/SocketModel');
+
+import http = require('http');
+import express = require('express');
+import SocketModel = require('./SocketModel');
 
 // Set default node environment to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -10,6 +12,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 //
 // Chat sample taken from socket.io example.
 //
+
 var app = express();
 var server = http.createServer(app);
 
@@ -20,4 +23,3 @@ server.listen(port, function () {
 
 var socketio = new SocketModel.SocketIO();
 socketio.initialize(server);
-//# sourceMappingURL=app.js.map
