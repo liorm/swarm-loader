@@ -1,19 +1,16 @@
 {
   "name": "swarm-server",
   "version": "0.0.0",
-  "main": "lib/swarm-server.js",
-  "description": "The best module ever.",
+  "main": "lib/app.js",
   "homepage": "https://github.com/liorm/swarm-server",
   "bugs": "https://github.com/liorm/swarm-server/issues",
   "author": {
-    "name": "Lior Mualem",
-    "email": ""
+    "name": "Lior Mualem"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/liorm/swarm-server"
   },
-  "license": "MIT",
   "files": [
     "lib"
   ],
@@ -28,5 +25,10 @@
   },
   "scripts": {
     "test": "grunt"
+  },
+  "dependencies": {
+    "socket.io": "^1.0.6",
+    "express": "^4.4.4",
+    "node-uuid": "^1.4.1"
   }
 }
